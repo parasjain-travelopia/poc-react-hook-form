@@ -33,7 +33,25 @@ export const YoutubeForm = () => {
           type='email'
           id='email'
           {...register("email", {
-            pattern: { value: /^/, message: "invalid email" },
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: "Invalid email format",
+            },
+            validate: {
+              notAdmin: (fieldValue) => {
+                return (
+                  fieldValue !== "admin@example.com" ||
+                  "Enter a diff email address"
+                );
+              },
+              notBlackListed: (fieldValue) => {
+                return (
+                  !fieldValue.endsWith("abc.com") ||
+                  "This domain is not supported"
+                );
+              },
+            },
           })}
         />
         <p className='error'>{errors.email?.message}</p>
