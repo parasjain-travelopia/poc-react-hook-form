@@ -11,7 +11,8 @@ export type FormType = {
 
 export const YoutubeForm = () => {
   const form = useForm<FormType>();
-  const { register, control, handleSubmit } = form;
+  const { register, control, handleSubmit, formState } = form;
+  const { errors } = formState;
   // const { name, ref, onChange, onBlur } = register("username");
 
   const onSubmit = (data: FormType) => {
@@ -26,6 +27,7 @@ export const YoutubeForm = () => {
           id='username'
           {...register("username", { required: "username is required" })}
         />
+        <p className='error'>{errors.username?.message}</p>
         <label htmlFor='email'> Email</label>
         <input
           type='email'
@@ -34,8 +36,14 @@ export const YoutubeForm = () => {
             pattern: { value: /^/, message: "invalid email" },
           })}
         />
+        <p className='error'>{errors.email?.message}</p>
         <label htmlFor='channel'> Channel</label>
-        <input type='text' id='channel' {...register("channel")} />
+        <input
+          type='text'
+          id='channel'
+          {...register("channel", { required: "channel is required" })}
+        />
+        <p className='error'>{errors.channel?.message}</p>
         <button>Submit</button>
       </form>
       <DevTool control={control} />
