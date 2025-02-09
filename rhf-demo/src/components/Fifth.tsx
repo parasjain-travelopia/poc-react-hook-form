@@ -21,7 +21,8 @@ export const Fifth = () => {
     mode: "all", // depend on this mode form will run the validations mode?: "onBlur" | "onChange" | "onSubmit" | "onTouched" | "all" | undefined
   });
 
-  const { register, formState, control, handleSubmit, reset } = form;
+  const { register, formState, control, handleSubmit, reset, trigger } = form;
+  // trigger( 'username') if we pass like this than validation happen only for username
 
   //reset // to reste the form value and dont call in onSubmit
 
@@ -105,7 +106,7 @@ export const Fifth = () => {
               valueAsNumber: true,
             })}
           />
-          <p>{errors.dob?.message}</p>
+          <p>{errors.phoneNo?.message}</p>
         </div>
 
         <div className='form-control'>
@@ -138,6 +139,10 @@ export const Fifth = () => {
         </button>
         <button type='button' onClick={() => reset()}>
           Reset
+        </button>
+
+        <button type='button' onClick={() => trigger()}>
+          Trigger
         </button>
       </form>
       <DevTool control={control} />
