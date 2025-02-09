@@ -8,6 +8,7 @@ type FormType = {
   username: string;
   dob: Date;
   phoneNo: number;
+  email: string;
 };
 export const Fifth = () => {
   const form = useForm<FormType>({
@@ -15,7 +16,9 @@ export const Fifth = () => {
       username: "test username",
       dob: new Date(),
       phoneNo: 9900990099,
+      email: "",
     },
+    mode: "all", // depend on this mode form will run the validations mode?: "onBlur" | "onChange" | "onSubmit" | "onTouched" | "all" | undefined
   });
 
   const { register, formState, control, handleSubmit, reset } = form;
@@ -105,7 +108,32 @@ export const Fifth = () => {
           <p>{errors.dob?.message}</p>
         </div>
 
-        <button type='submit' disabled={!isDirty || !isValid}>
+        <div className='form-control'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='text'
+            id='email'
+            {...register("email", {
+              required: {
+                value: true,
+                message: "email is required",
+              },
+
+              validate: {
+                emailAvailable: async (fieldValue) => {
+                  const res = await fetch(
+                    `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
+                  );
+                  const data = await res.json();
+                  return data.length == 0 || "already exist";
+                },
+              },
+            })}
+          />
+          <p>{errors.email?.message}</p>
+        </div>
+
+        <button type='submit' disabled={!isDirty}>
           Submit
         </button>
         <button type='button' onClick={() => reset()}>
