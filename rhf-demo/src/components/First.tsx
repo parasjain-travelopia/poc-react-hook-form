@@ -29,14 +29,18 @@ export const First = () => {
   });
   const { register, control, handleSubmit, formState, getValues, setValue } =
     form;
-  const { errors } = formState;
+  const { errors, touchedFields, dirtyFields, isDirty } = formState;
+
+  console.log("touchedFields", touchedFields);
+  console.log("dirtyFields", dirtyFields);
+  console.log("isDirty", isDirty);
 
   const onSubmit = (data: FormType) => {
-    console.log(data);
+    //console.log(data);
   };
 
   const handelGetValues = () => {
-    console.log("Get VAlues", getValues());
+    //console.log("Get VAlues", getValues());
   };
 
   const handelSetValues = () => {
@@ -44,7 +48,6 @@ export const First = () => {
   };
 
   //set values does not affect the field touch and dirty
-
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
