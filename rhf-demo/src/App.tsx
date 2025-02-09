@@ -1,13 +1,12 @@
 /** @format */
 
 import "./App.css";
-
-import { YoutubeForm2 } from "./components/YouTubeForm2";
+import { ThirdForm } from "./components/ThirdForm";
 
 function App() {
   return (
     <div>
-      <YoutubeForm2 />
+      <ThirdForm />
     </div>
   );
 }
