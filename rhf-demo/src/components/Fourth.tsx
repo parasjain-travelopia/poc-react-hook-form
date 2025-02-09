@@ -9,7 +9,7 @@ type FormType = {
 
 let renderCount = 0;
 
-export const FourthForm = () => {
+export const Fourth = () => {
   const form = useForm<FormType>({
     defaultValues: {
       user: "name",

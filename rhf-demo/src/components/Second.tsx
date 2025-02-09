@@ -8,7 +8,7 @@ export type FormType = {
   dob: Date;
 };
 
-export const ThirdForm = () => {
+export const Second = () => {
   const form = useForm<FormType>({
     defaultValues: {
       age: 0,
