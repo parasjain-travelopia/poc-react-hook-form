@@ -14,7 +14,7 @@ export type FormType = {
   phoneNumbers: string[];
 };
 
-export const YoutubeForm1 = () => {
+export const First = () => {
   const form = useForm<FormType>({
     defaultValues: {
       username: "Batman",
@@ -27,13 +27,24 @@ export const YoutubeForm1 = () => {
       phoneNumbers: ["", ""],
     },
   });
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, getValues, setValue } =
+    form;
   const { errors } = formState;
-  // const { name, ref, onChange, onBlur } = register("username");
 
   const onSubmit = (data: FormType) => {
     console.log(data);
   };
+
+  const handelGetValues = () => {
+    console.log("Get VAlues", getValues());
+  };
+
+  const handelSetValues = () => {
+    setValue("channel", "its my channel");
+  };
+
+  //set values does not affect the field touch and dirty
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -119,6 +130,13 @@ export const YoutubeForm1 = () => {
           <p className='error'>{errors.phoneNumbers?.message}</p>
         </div>
         <button>Submit</button>
+        <button type='button' onClick={handelGetValues}>
+          Get VAlues
+        </button>
+
+        <button type='button' onClick={handelSetValues}>
+          Set Values
+        </button>
       </form>
       <DevTool control={control} />
     </div>

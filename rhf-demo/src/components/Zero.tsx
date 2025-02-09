@@ -9,7 +9,7 @@ export type FormType = {
   channel: string;
 };
 
-export const YoutubeForm = () => {
+export const Zero = () => {
   const form = useForm<FormType>();
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
