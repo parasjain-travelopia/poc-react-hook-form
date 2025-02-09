@@ -11,6 +11,7 @@ export type FormType = {
     twitter: string;
     facebook: string;
   };
+  phoneNumbers: string[];
 };
 
 export const YoutubeForm1 = () => {
@@ -23,6 +24,7 @@ export const YoutubeForm1 = () => {
         twitter: "",
         facebook: "",
       },
+      phoneNumbers: ["", ""],
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -88,13 +90,33 @@ export const YoutubeForm1 = () => {
         <div className='form-control'>
           <label htmlFor='twitter'> Twitter</label>
           <input type='text' id='twitter' {...register("social.twitter")} />
-          <p className='error'>{errors.channel?.message}</p>
+          <p className='error'>{errors.social?.twitter?.message}</p>
         </div>
 
         <div className='form-control'>
           <label htmlFor='facebook'> facebook</label>
           <input type='text' id='facebook' {...register("social.facebook")} />
-          <p className='error'>{errors.channel?.message}</p>
+          <p className='error'>{errors.social?.facebook?.message}</p>
+        </div>
+
+        <div className='form-control'>
+          <label htmlFor='primary-phone'> Primary Phone</label>
+          <input
+            type='text'
+            id='primary-phone'
+            {...register("phoneNumbers.0")}
+          />
+          <p className='error'>{errors.phoneNumbers?.message}</p>
+        </div>
+
+        <div className='form-control'>
+          <label htmlFor='secondary-phone'> Secondary Phone</label>
+          <input
+            type='text'
+            id='secondary-phone'
+            {...register("phoneNumbers.1")}
+          />
+          <p className='error'>{errors.phoneNumbers?.message}</p>
         </div>
         <button>Submit</button>
       </form>
