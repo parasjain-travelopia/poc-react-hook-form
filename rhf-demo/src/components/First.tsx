@@ -27,8 +27,15 @@ export const First = () => {
       phoneNumbers: ["", ""],
     },
   });
-  const { register, control, handleSubmit, formState, getValues, setValue } =
-    form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    getValues,
+    setValue,
+    watch,
+  } = form;
   const { errors, touchedFields, dirtyFields, isDirty } = formState;
 
   console.log("touchedFields", touchedFields);
@@ -103,13 +110,26 @@ export const First = () => {
 
         <div className='form-control'>
           <label htmlFor='twitter'> Twitter</label>
-          <input type='text' id='twitter' {...register("social.twitter")} />
+          <input
+            type='text'
+            id='twitter'
+            {...register("social.twitter", {
+              disabled: true,
+              required: "Enter a valid value",
+            })}
+          />
           <p className='error'>{errors.social?.twitter?.message}</p>
         </div>
 
         <div className='form-control'>
           <label htmlFor='facebook'> facebook</label>
-          <input type='text' id='facebook' {...register("social.facebook")} />
+          <input
+            type='text'
+            id='facebook'
+            {...register("social.facebook", {
+              disabled: watch("channel") === "", // conditional disabling
+            })}
+          />
           <p className='error'>{errors.social?.facebook?.message}</p>
         </div>
 
@@ -136,7 +156,6 @@ export const First = () => {
         <button type='button' onClick={handelGetValues}>
           Get VAlues
         </button>
-
         <button type='button' onClick={handelSetValues}>
           Set Values
         </button>
